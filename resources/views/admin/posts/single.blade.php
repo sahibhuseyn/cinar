@@ -1,4 +1,10 @@
 @extends('admin.layout.layout')
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('/admin/components/select2/css/select2.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url('/admin/components/select2/css/select2-bootstrap.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url('/admin/components/select2/css/pmd-select2.css') }}"/>
+
+@endsection
 @section('content')
     <div class="container-fluid full-width-container value-added-detail-page">
         <div>
@@ -34,6 +40,45 @@
                             <div class="form-group pmd-textfield">
                                 <input type="text" name="author" id="author" class="hidden form-control" value="{{ $post->author }}"><span class="pmd-textfield-focused"></span>
                             </div>
+
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label>Select Tags</label>
+                                <select name="tags[]" class="form-control select-add-tags pmd-select2-tags select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true">
+                                    @php
+                                        $tags = App\Tag::getTags();
+                                    @endphp
+                                    @foreach($tags as $tag)
+                                        <option value="{{ $tag->id }}"
+                                                @foreach ($post->tags as $postTag)
+                                                    @if ($postTag->id == $tag->id)
+                                                        selected
+                                                    @endif
+                                                @endforeach
+                                        >{{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label>Select Category</label>
+                                <select name="categories[]" class="form-control select-add-tags pmd-select2-tags select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true">
+
+                                    @php
+                                        $categories = App\Category::getCategories();
+                                    @endphp
+
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                                @foreach ($post->categories as $postCategory)
+                                                    @if ($postCategory->id == $category->id)
+                                                        selected
+                                                    @endif
+                                                @endforeach
+                                        >{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="form-group pmd-textfield">
                                 <label for="name" class="control-label">Post Sub Title</label>
                                 <textarea name="sub_title" class="form-control" id="" cols="30" rows="10">{{ $post->sub_title }}</textarea>
@@ -53,4 +98,39 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('script')
+
+    <script src="{{ url('/admin/components/select2/js/select2.full.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            <!-- Simple Selectbox -->
+            $(".pmd-select2-tags").select2({
+                theme: "bootstrap",
+                minimumResultsForSearch: Infinity,
+            });
+            <!-- Selectbox with search -->
+            $(".select-with-search").select2({
+                theme: "bootstrap"
+            });
+            <!-- Select Multiple Tags -->
+            $(".select-tags").select2({
+                tags: false,
+                theme: "bootstrap",
+            });
+            <!-- Select & Add Multiple Tags -->
+            $(".select-add-tags").select2({
+                tags: true,
+                theme: "bootstrap",
+            });
+        });
+    </script>
+
+
+    <script src="{{ url('/admin/components/select2/js/pmd-select2.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -14,7 +15,8 @@ class PostController extends Controller
         return view('admin.posts.posts', compact('posts'));
     }
 
-    public function edit(Post $post){
+    public function edit($id){
+        $post = Post::with('tags', 'categories')->where('id', $id)->first();
 
         return view('admin.posts.single', compact('post'));
     }
@@ -25,6 +27,7 @@ class PostController extends Controller
     }
 
     public function add(Request $request){
+
 
         $slug = str_slug($request->title);
 
@@ -58,11 +61,15 @@ class PostController extends Controller
 
 
         $post->save();
+        $post->tags()->sync($request->tags);
+        $post->categories()->sync($request->categories);
+
         Session::flash('success', 'Successfully added');
 
         return back();
 
     }
+
     public function update(Post $post, Request $request){
 
 
@@ -87,6 +94,9 @@ class PostController extends Controller
             $post->sub_title = $request->sub_title;
             $post->author = $request->author;
             $post->body = $request->body;
+            $post->tags()->sync($request->tags);
+            $post->categories()->sync($request->categories);
+
             $post->update();
 
         } else {
@@ -96,6 +106,9 @@ class PostController extends Controller
                 $post->sub_title = $request->sub_title;
                 $post->author = $request->author;
                 $post->body = $request->body;
+                $post->tags()->sync($request->tags);
+                $post->categories()->sync($request->categories);
+
                 $post->update();
 
             } else if ($exists) {
