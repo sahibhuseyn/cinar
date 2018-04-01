@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Chinar Yayimlari Books">
-    <meta name="keywords" content="kindergarten, kids, school">
-    <meta name="author" content="Nijat Zamanov, Aliaga Aliyev">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    @foreach($seos as $seo)
+        <meta name="description" content="{{ $seo->description }}">
+        <meta name="keywords" content="{{ $seo->keywords }}">
+    @endforeach
+
+    <meta name="author" content="Nijat Zamanov, Sahib Huseynov">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Çinar Yayımları - Təməlində sevgi var</title>

@@ -103,7 +103,7 @@
                 <span>Menu</span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="">Menu</a></li>
+                <li><a href="{{ route('admin_menu') }}">Menu</a></li>
             </ul>
         </li>
 
@@ -113,7 +113,34 @@
                 <span>Sub Menu</span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="">Sub Menu</a></li>
+                <li><a href="{{ route('admin_sub_menu') }}">Sub Menu</a></li>
+            </ul>
+        </li>
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user  media" data-sidebar="true" href="javascript:void(0)">
+                <i class="material-icons md-dark pmd-md" style="color: #ffffff">comment</i>
+                <span>Posts</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('admin_posts') }}">Posts</a></li>
+            </ul>
+        </li>
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user  media" data-sidebar="true" href="javascript:void(0)">
+                <i class="material-icons md-dark pmd-md" style="color: #ffffff">label_outline</i>
+                <span>Post Tags</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('admin_tags') }}">Tags</a></li>
+            </ul>
+        </li>
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user  media" data-sidebar="true" href="javascript:void(0)">
+                <i class="material-icons md-dark pmd-md" style="color: #ffffff">library_books</i>
+                <span>Post Categories</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('admin_categories') }}">Categories</a></li>
             </ul>
         </li>
 
@@ -123,7 +150,7 @@
                 <span>SEO</span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="">SEO</a></li>
+                <li><a href="{{ route('admin_seo') }}">SEO</a></li>
             </ul>
         </li>
         <li class="dropdown pmd-dropdown">
@@ -141,7 +168,7 @@
                 <span>Facilities</span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="">Facilities</a></li>
+                <li><a href="{{ route('admin_facility') }}">Facilities</a></li>
             </ul>
         </li>
 
@@ -154,6 +181,22 @@
 <div id="content" class="pmd-content content-area dashboard">
 
     <div class="container-fluid">
+
+        @if (Session::has('success'))
+            <div class="container-fluid">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    {{ Session::get('success') }}
+                </div>
+            </div>
+        @elseif(Session::has('fail'))
+            <div class="container-fluid">
+                <div class="alert alert-warning" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    {{ Session::get('fail') }}
+                </div>
+            </div>
+        @endif
 
         @yield('content')
 
@@ -216,6 +259,12 @@
             $(this).find("a[href='" + sPage + "']").parents(".dropdown").find('a.dropdown-toggle').addClass("active");
             $(this).find("a[href='" + sPage + "']").addClass("active");
         });
+
+        $("a.submit").click(function(){
+            $(this).parent('form.deleteForm').submit();
+            // document.getElementById("myForm").submit();
+        });
+
     });
 </script>
 <script type="text/javascript">

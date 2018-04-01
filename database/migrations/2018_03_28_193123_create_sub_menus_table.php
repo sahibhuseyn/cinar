@@ -15,11 +15,10 @@ class CreateSubMenusTable extends Migration
     {
         Schema::create('sub_menus', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id')->unsigned();
-            $table->foreign('parent_id')->references('id')->on('menus')->onDelete('cascade');
-            $table->string('name')->unique();
+            $table->integer('menu_id')->unsigned();
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
+            $table->string('name');
             $table->string('slug')->unique();
-            $table->text('body');
             $table->timestamps();
         });
     }

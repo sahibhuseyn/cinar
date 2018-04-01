@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// ================================= START CLIENT ==============================================================
+
 
 Route::group(['middleware' => [ 'web']], function () {
 
@@ -24,11 +26,6 @@ Route::group(['middleware' => [ 'web']], function () {
     Route::get('/test-your-english', 'Client\TestController@testMain')->name('test');
 
 
-    Route::group(['prefix' => 'courses'], function () {
-        Route::get('/', 'Client\CourseController@courseList')->name('course_list');
-        Route::get('/{slug}', 'Client\CourseController@courseSingle')->name('course_single');
-        Route::get('/category/{id}', 'Client\CourseController@courseCategory')->name('course_category');
-    });
 
     Route::group(['prefix' => 'posts'], function (){
         Route::get('/', 'Client\PostController@postList')->name('post_list');
@@ -36,9 +33,6 @@ Route::group(['middleware' => [ 'web']], function () {
         Route::get('/category/{id}', 'Client\PostController@postType')->name('post_type');
     });
 
-    Route::group(['prefix' => 'prices'], function (){
-        Route::get('/', 'Client\PriceController@priceList')->name('price_list');
-    });
 
     Route::group(['prefix' => 'study-abroad'], function (){
         Route::get('/', 'Client\StudyAbroadController@studyList')->name('study_abroad');
@@ -60,15 +54,9 @@ Route::group(['middleware' => [ 'web']], function () {
 // ================================= END CLIENT ==============================================================
 
 // ================================= ADMIN ===============================================================
+
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'dashboard'], function () {
     Route::get('/', 'Admin\MainController@index')->name('admin_index');
-
-    Route::group(['prefix' => 'languages'], function () {
-        Route::get('/', 'Admin\LanguageController@index')->name('admin_languages');
-        Route::post('/add', 'Admin\LanguageController@add')->name('admin_languages_add');
-        Route::post('/update', 'Admin\LanguageController@update')->name('admin_languages_update');
-        Route::get('/delete/{language}', 'admin\LanguageController@delete')->name('admin_languages_delete');
-    });
 
 
     Route::group(['prefix' => 'categories'], function () {
@@ -78,11 +66,32 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'dashboard'], functio
         Route::post('/{category}/delete', 'Admin\CategoryController@delete')->name('admin_categories_delete');
     });
 
-    Route::group(['prefix' => 'types'], function () {
-        Route::get('/{language_code}', 'Admin\TypeController@listTypes')->name('admin_types');
-        Route::post('/{language_id}/add', 'Admin\TypeController@add')->name('admin_types_add');
-        Route::post('/{type}/update', 'Admin\TypeController@update')->name('admin_types_update');
-        Route::post('/{type}/delete', 'Admin\TypeController@delete')->name('admin_types_delete');
+//    menu and sub menu root section start
+
+    Route::group(['prefix' => 'menus'], function () {
+        Route::get('/', 'Admin\MenuController@show')->name('admin_menu');
+        Route::post('/add', 'Admin\MenuController@add')->name('admin_menu_add');
+        Route::get('/{menu}/edit', 'Admin\MenuController@edit')->name('admin_menu_edit');
+        Route::post('/{menu}/update', 'Admin\MenuController@update')->name('admin_menu_update');
+        Route::post('/{menu}/delete', 'Admin\MenuController@delete')->name('admin_menu_delete');
+    });
+
+    Route::group(['prefix' => 'sub-menus'], function () {
+        Route::get('/', 'Admin\SubMenuController@show')->name('admin_sub_menu');
+        Route::post('/add', 'Admin\SubMenuController@add')->name('admin_sub_menu_add');
+        Route::get('/{subMenu}/edit', 'Admin\SubMenuController@edit')->name('admin_sub_menu_edit');
+        Route::post('/{subMenu}/update', 'Admin\SubMenuController@update')->name('admin_sub_menu_update');
+        Route::post('/{subMenu}/delete', 'Admin\SubMenuController@delete')->name('admin_sub_menu_delete');
+    });
+
+//    menu and sub menu root section ends
+
+    Route::group(['prefix' => 'facility'], function () {
+        Route::get('/', 'Admin\FacilityController@show')->name('admin_facility');
+        Route::post('/add', 'Admin\FacilityController@add')->name('admin_facility_add');
+        Route::get('/{facility}/edit', 'Admin\FacilityController@edit')->name('admin_facility_edit');
+        Route::post('/{facility}/update', 'Admin\FacilityController@update')->name('admin_facility_update');
+        Route::post('/{facility}/delete', 'Admin\FacilityController@delete')->name('admin_facility_delete');
     });
 
     Route::group(['prefix' => 'slider'], function () {
@@ -92,60 +101,45 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'dashboard'], functio
         Route::post('/{slider}/delete', 'Admin\SliderController@delete')->name('admin_slider_delete');
     });
 
-    Route::group(['prefix' => 'gallery'], function () {
-        Route::get('/{language_code}', 'Admin\GalleryController@listGalleries')->name('admin_gallery');
-        Route::post('/{language_id}/add', 'Admin\GalleryController@add')->name('admin_gallery_add');
-        Route::post('/{gallery}/update', 'Admin\GalleryController@update')->name('admin_gallery_update');
-        Route::post('/{gallery}/delete', 'Admin\GalleryController@delete')->name('admin_gallery_delete');
+    Route::group(['prefix' => 'seo'], function () {
+        Route::get('/', 'Admin\SeoController@show')->name('admin_seo');
+        Route::post('/add', 'Admin\SeoController@add')->name('admin_seo_add');
+        Route::post('/{seo}/update', 'Admin\SeoController@update')->name('admin_seo_update');
+        Route::post('/{seo}/delete', 'Admin\SeoController@delete')->name('admin_seo_delete');
     });
 
-    Route::group(['prefix' => 'jobs'], function () {
-        Route::get('/{language_code}', 'Admin\JobController@listJobs')->name('admin_jobs');
-        Route::get('/{job}/edit', 'Admin\JobController@edit')->name('admin_jobs_edit');
-        Route::post('/{language_id}/add', 'Admin\JobController@add')->name('admin_jobs_add');
-        Route::post('/{job}/update', 'Admin\JobController@update')->name('admin_jobs_update');
-        Route::post('/{job}/delete', 'Admin\JobController@delete')->name('admin_jobs_delete');
-    });
-
-    Route::group(['prefix' => 'teachers'], function () {
-        Route::get('/{language_code}', 'Admin\TeacherController@show')->name('admin_teachers');
-        Route::post('/{language_id}/add', 'Admin\TeacherController@add')->name('admin_teachers_add');
-        Route::post('/{teacher}/update', 'Admin\TeacherController@update')->name('admin_teachers_update');
-        Route::post('/{teacher}/delete', 'Admin\TeacherController@delete')->name('admin_teachers_delete');
-    });
-
-    Route::group(['prefix' => 'testimonials'], function () {
-        Route::get('/{language_code}', 'Admin\TestimonialController@show')->name('admin_testimonials');
-        Route::post('/{language_id}/add', 'Admin\TestimonialController@add')->name('admin_testimonials_add');
-        Route::post('/{testimonial}/update', 'Admin\TestimonialController@update')->name('admin_testimonials_update');
-        Route::post('/{testimonial}/delete', 'Admin\TestimonialController@delete')->name('admin_testimonials_delete');
-    });
+//    post and its tags and categories root section starts
 
     Route::group(['prefix' => 'posts'], function () {
-        Route::get('/{language_code}', 'Admin\PostController@show')->name('admin_posts');
-        Route::post('/{language_id}/add', 'Admin\PostController@add')->name('admin_posts_add');
-        Route::get('/{post}/edit', 'Admin\PostController@edit')->name('admin_posts_edit');
-        Route::post('/{post}/update', 'Admin\PostController@update')->name('admin_posts_update');
-        Route::post('/{post}/delete', 'Admin\PostController@delete')->name('admin_posts_delete');
+        Route::get('/', 'Admin\PostController@show')->name('admin_posts');
+        Route::get('/add-new-post', 'Admin\PostController@newPost')->name('admin_add_new_post');
+        Route::post('/add', 'Admin\PostController@add')->name('admin_post_add');
+        Route::get('/{post}/edit', 'Admin\PostController@edit')->name('admin_post_edit');
+        Route::post('/{post}/update', 'Admin\PostController@update')->name('admin_post_update');
+        Route::post('/{post}/delete', 'Admin\PostController@delete')->name('admin_post_delete');
     });
 
-    Route::group(['prefix' => 'courses'], function () {
-        Route::get('/{language_code}', 'Admin\CourseController@show')->name('admin_courses');
-        Route::post('/{language_id}/add', 'Admin\CourseController@add')->name('admin_courses_add');
-        Route::get('/{course}/{code}/edit', 'Admin\CourseController@edit')->name('admin_courses_edit');
-        Route::post('/{course}/update', 'Admin\CourseController@update')->name('admin_courses_update');
-        Route::post('/{course}/delete', 'Admin\CourseController@delete')->name('admin_courses_delete');
+    Route::group(['prefix' => 'tags'], function () {
+        Route::get('/', 'Admin\TagController@show')->name('admin_tags');
+        Route::post('/add', 'Admin\TagController@add')->name('admin_tag_add');
+        Route::get('/{tag}/edit', 'Admin\TagController@edit')->name('admin_tag_edit');
+        Route::post('/{tag}/update', 'Admin\TagController@update')->name('admin_tag_update');
+        Route::post('/{tag}/delete', 'Admin\TagController@delete')->name('admin_tag_delete');
     });
 
-    Route::group(['prefix' => 'study'], function () {
-        Route::get('/{language_code}', 'Admin\StudyController@show')->name('admin_study');
-        Route::post('/{language_id}/add', 'Admin\StudyController@add')->name('admin_study_add');
-        Route::get('/{study}/{code}/edit', 'Admin\StudyController@edit')->name('admin_study_edit');
-        Route::post('/{study}/update', 'Admin\StudyController@update')->name('admin_study_update');
-        Route::post('/{study}/delete', 'Admin\StudyController@delete')->name('admin_study_delete');
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/', 'Admin\CategoryController@show')->name('admin_categories');
+        Route::post('/add', 'Admin\CategoryController@add')->name('admin_category_add');
+        Route::get('/{category}/edit', 'Admin\CategoryController@edit')->name('admin_category_edit');
+        Route::post('/{category}/update', 'Admin\CategoryController@update')->name('admin_category_update');
+        Route::post('/{category}/delete', 'Admin\CategoryController@delete')->name('admin_category_delete');
     });
+
+
+//    posts and its tags and categories root section ends
 
 });
+
 // ================================= END ADMIN ==============================================================
 
 
