@@ -25,6 +25,9 @@
                                 <input type="text" name="title" id="name" class="form-control"><span class="pmd-textfield-focused"></span>
                             </div>
                             <div class="form-group pmd-textfield">
+                                <input type="text" name="author" id="author" class="hidden form-control" value="{{ Auth::user()->name }}"><span class="pmd-textfield-focused"></span>
+                            </div>
+                            <div class="form-group pmd-textfield">
                                 <label for="name" class="control-label">Post Sub Title</label>
                                 <textarea name="sub_title" class="form-control" id="" cols="30" rows="10"></textarea>
                                 <span class="pmd-textfield-focused"></span>
@@ -35,6 +38,7 @@
                                 <span class="pmd-textfield-focused"></span>
                             </div>
                             <button type="submit" class="btn btn-success">Submit</button>
+                            <a href="{{ route('admin_posts') }}" class="btn btn-primary">Back</a>
                         </div>
                     </form>
                 </div>

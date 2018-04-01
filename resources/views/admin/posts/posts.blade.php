@@ -18,6 +18,7 @@
                     <th>Id</th>
                     <th>Title</th>
                     <th>Sub Title</th>
+                    <th>Body</th>
                     <th>Last Updated On</th>
                     <th>Actions</th>
                 </tr>
@@ -31,6 +32,7 @@
                         <td data-title="Id">{{ $count+1 }}</td>
                         <td data-title="Name">{{ $post->title }}</td>
                         <td data-title="Name">{{ $post->sub_title }}</td>
+                        <td data-title="Name">{{ str_limit($post->body, 15) }}</td>
                         <td data-title="date">{{ Carbon\Carbon::parse($post->updated_at)->format('d-m-Y') }}</td>
                         <td class="pmd-table-row-action">
                             <ul class="list-inline">

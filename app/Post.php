@@ -11,4 +11,8 @@ class Post extends Model
         return Post::all();
     }
 
+    public static function getPostBySlug($slug){
+        return Post::where('slug', $slug)->first();
+    }
+
 }
