@@ -1,4 +1,4 @@
-<header class="header-three">
+<header class="{{ Request::path() == '/' ? 'header-three' : '' }}">
     <div class="header-top">
         <div class="container">
             <ul class="left">

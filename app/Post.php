@@ -8,11 +8,21 @@ class Post extends Model
 {
 
     public static function getPosts(){
-        return Post::all();
+
+        return Post::paginate(10);
+
     }
 
     public static function getPostBySlug($slug){
+
         return Post::where('slug', $slug)->first();
+
+    }
+
+    public static function getPostsDesc(){
+
+        return Post::orderBy('updated_at', 'DESC')->paginate(4);
+
     }
 
     public function tags(){
@@ -23,6 +33,10 @@ class Post extends Model
     public function categories(){
 
         return $this->belongsToMany('App\Category', 'post_categories');
+    }
+
+    public function getRouteKeyName(){
+        return 'slug';
     }
 
 }

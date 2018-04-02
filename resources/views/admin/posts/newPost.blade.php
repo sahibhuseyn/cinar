@@ -108,6 +108,6 @@
 
 
     <script src="{{ url('/admin/components/select2/js/pmd-select2.js') }}"></script>
-    <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.7.1/full/ckeditor.js"></script>
 
 @endsection

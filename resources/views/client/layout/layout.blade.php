@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @php
+
+        $seos = App\Seo::getSeo();
+        $settings = App\UserSetting::getSettings();
+
+    @endphp
+
     @foreach($seos as $seo)
         <meta name="description" content="{{ $seo->description }}">
         <meta name="keywords" content="{{ $seo->keywords }}">

@@ -18,36 +18,18 @@ Route::group(['middleware' => [ 'web']], function () {
     // Page Routes
     Route::get('/', 'Client\MainController@index')->name('index');
     Route::get('/contacts', 'Client\ContactController@contacts')->name('contacts');
-    Route::post('/candidate-add', 'Client\CandidateController@add')->name('test_candidate');
     Route::get('/about', 'Client\AboutController@about')->name('about');
-    Route::get('/gallery', 'Client\GalleryController@gallery')->name('gallery');
-    Route::get('/begin-test', 'Client\TestController@testLogin')->name('test_login');
-    Route::post('/begin-test', 'Client\TestController@testPost');
-    Route::get('/test-your-english', 'Client\TestController@testMain')->name('test');
 
 
 
     Route::group(['prefix' => 'posts'], function (){
         Route::get('/', 'Client\PostController@postList')->name('post_list');
         Route::get('/{slug}', 'Client\PostController@postSingle')->name('post_single');
-        Route::get('/category/{id}', 'Client\PostController@postType')->name('post_type');
+        Route::get('/tag/{tag}', 'Client\PostController@tag')->name('tag');
+        Route::get('/category/{category}', 'Client\PostController@category')->name('category');
     });
 
 
-    Route::group(['prefix' => 'study-abroad'], function (){
-        Route::get('/', 'Client\StudyAbroadController@studyList')->name('study_abroad');
-        Route::get('/{slug}', 'Client\StudyAbroadController@studySingle')->name('study_single');
-        Route::get('/type/{id}', 'Client\StudyAbroadController@studyType')->name('study_type');
-    });
-
-    Route::group(['prefix' => 'jobs'], function (){
-        Route::get('/', 'Client\JobController@jobList')->name('job_list');
-        Route::get('/{slug}', 'Client\JobController@jobSingle')->name('job_single');
-    });
-
-    Route::group(['prefix' => 'language_change'], function (){
-        Route::get('/{code}', 'Client\LanguageController@changeLanguage')->name('change_language');
-    });
 });
 
 

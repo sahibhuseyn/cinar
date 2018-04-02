@@ -70,11 +70,13 @@ class PostController extends Controller
 
     }
 
-    public function update(Post $post, Request $request){
+    public function update( Request $request, $id){
 
 
         $slug = str_slug($request->title);
         $exists = Post::getPostBySlug($slug);
+
+        $post = Post::find($id);
 
         if ($request->image) {
 

@@ -422,7 +422,7 @@ input[type="submit"][disabled]:focus {
 .section-notch:before{
     content: "";
     position: absolute;
-    background: url(../../images/section_notch_top.png);
+    background: url(../images/section_notch_top.png);
     background-repeat: repeat-x;
     display: block;
     top: 0;
@@ -433,7 +433,7 @@ input[type="submit"][disabled]:focus {
 .section-notch:after{
     content: "";
     position: absolute;
-    background-image: url(../../images/section_notch_bottom.png);
+    background-image: url(../images/section_notch_bottom.png);
     background-repeat: repeat-x;
     bottom: 0;
     width: 100%;
@@ -1115,7 +1115,7 @@ header .main-menu .menu_cart .check_out{
 /*  Page Header
 ----------------------------------------------*/
 .page-header{
-    background-image: url(../../images/background/page-header-bg.jpg);
+    background-image: url(../images/background/page-header-bg.jpg);
     background-size: cover;
     background-position: center;
     margin: 0px;

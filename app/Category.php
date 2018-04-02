@@ -18,6 +18,10 @@ class Category extends Model
 
     public function posts(){
 
-        return $this->belongsToMany('App\Post', 'post_categories');
+        return $this->belongsToMany('App\Post', 'post_categories')->orderBy('updated_at', 'DESC')->paginate(10);
+    }
+
+    public function getRouteKeyName(){
+        return 'slug';
     }
 }
