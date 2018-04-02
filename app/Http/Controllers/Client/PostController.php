@@ -26,13 +26,19 @@ class PostController extends Controller
 
         $latests = Post::getPostsDesc();
 
+        $categories = Category::all();
+
+        $tags = Tag::getTags();
+
+
+
         $posts = Post::getPostsDesc();
 
         if(!$post){
             return back();
         }
 
-        return view('client.posts.single', compact('post', 'posts', 'latests'));
+        return view('client.posts.single', compact('post', 'posts', 'latests', 'categories', 'tags'));
 
     }
 

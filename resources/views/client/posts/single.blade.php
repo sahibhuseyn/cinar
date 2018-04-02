@@ -1,4 +1,38 @@
 @extends('client.layout.layout')
+
+@section('facebook')
+
+{{--facebook code content --}}
+
+<meta property="og:url"           content="https://cinaryayimlari.com/{{ $post->slug }}" />
+<meta property="og:type"          content="website" />
+<meta property="og:title"         content="{{ $post->title }}" />
+<meta property="og:description"   content="{{ $post->sub_title }}" />
+<meta property="og:image"         content="https://cinaryayimlari.com/uploads/{{ $post->image }}" />
+
+{{--facebook code content --}}
+
+@endsection
+
+@section('fb_js')
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+@endsection
+
+@section('head_js')
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+@endsection
+
+
 @section('content')
 
     <!-- Page Header Start here -->
@@ -36,13 +70,20 @@
                             <ul class="post-tags">
                                 <li><span class="flaticon-tags-outline"></span> Tags :</li>
                                 @foreach($post->tags as $tag)
-                                    <li><a href="#">{{ $tag }}</a> -</li>
+                                    <li><a href="{{ route('tag', $tag->slug) }}">{{ $tag->name }}</a> -</li>
                                 @endforeach
                             </ul>
+
+
                             <ul class="post-share">
                                 <li><span class="flaticon-share"></span> Share :</li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li class="fb-share-button" data-href="http://cinaryayimlari.com/" data-layout="button" data-size="small" data-mobile-iframe="true">
+                                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fcinaryayimlari.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+                                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li><a href="https://plus.google.com/share?url=cinaryayimlari.com/posts/{{ $post->slug }}" onclick="window.open(this.href, 'Google+', 'width=490,height=530'); return false;">
+                                        <i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -53,15 +94,14 @@
                             <h3 class="sidebar-title">All Categories</h3>
 
                             <ul class="sidebar-categories">
-                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> school <span>05</span></a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> kindergarden <span>27</span></a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> kids <span>07</span></a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> school <span>05</span></a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> kindergarden <span>27</span></a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> kids <span>07</span></a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> school <span>05</span></a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> kindergarden <span>27</span></a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> kids <span>07</span></a></li>
+                                @foreach($categories as $category)
+                                    <li>
+                                        <a href="{{ route('category', $category->slug) }}">
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            {{ $category->name }} <span>{{ count($category->posts()) }}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="sidebar-item">
@@ -71,7 +111,7 @@
                                 @foreach($latests as $latest)
                                     <li>
                                         <div class="image">
-                                            <a href="{{ route('post_single', $latest->slug) }}"><img src="images/blog/latest_post_01.jpg" alt="post image" class="img-responsive"></a>
+                                            <a href="{{ route('post_single', $latest->slug) }}"><img src="{{ url('/uploads/'.$latest->image) }}" alt="post image" class="img-responsive"></a>
                                         </div>
                                         <div class="content">
                                             <a href="{{ route('post_single', $latest->slug) }}">Foulate revlunry and the mihare are a awesome the theme.</a>
@@ -85,14 +125,9 @@
                             <h3 class="sidebar-title">Latest Tags</h3>
 
                             <ul class="sidebar-tags">
-                                <li><a href="#">sinif</a></li>
-                                <li><a href="#">mekteb</a></li>
-                                <li><a href="#">ibtidai</a></li>
-                                <li><a href="#">kitab</a></li>
-                                <li><a href="#">sinif</a></li>
-                                <li><a href="#">mekteb</a></li>
-                                <li><a href="#">ibtidai</a></li>
-                                <li><a href="#">kitab</a></li>
+                                @foreach($tags as $tag)
+                                    <li><a href="{{ route('tag', $tag->slug) }}">{{ $tag->name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

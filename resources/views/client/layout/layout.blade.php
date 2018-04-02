@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @yield('facebook')
+
     @php
 
         $seos = App\Seo::getSeo();
@@ -28,9 +30,13 @@
     <link href="{{ url('/client/css/style.css') }}" rel="stylesheet">
     <link href="{{ url('/client/css/responsive.css') }}" rel="stylesheet">
 
+    @yield('head_js')
+
 
 </head>
 <body id="scroll-top">
+
+@yield('fb_js')
 
 @include('client.partials.header')
 

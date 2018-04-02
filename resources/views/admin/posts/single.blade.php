@@ -1,10 +1,12 @@
 @extends('admin.layout.layout')
+
 @section('style')
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/components/select2/css/select2.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/components/select2/css/select2-bootstrap.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/components/select2/css/pmd-select2.css') }}"/>
 
 @endsection
+
 @section('content')
     <div class="container-fluid full-width-container value-added-detail-page">
         <div>

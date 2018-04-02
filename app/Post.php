@@ -21,7 +21,7 @@ class Post extends Model
 
     public static function getPostsDesc(){
 
-        return Post::orderBy('updated_at', 'DESC')->paginate(4);
+        return Post::orderBy('updated_at', 'DESC')->limit(4)->get();
 
     }
 

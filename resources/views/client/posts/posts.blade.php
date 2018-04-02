@@ -53,7 +53,7 @@
                                 <li>
                                     <a href="{{ route('category', $category->slug) }}">
                                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                        {{ $category->name }} <span>05</span>
+                                        {{ $category->name }} <span>{{ count($category->posts()) }}</span>
                                     </a>
                                 </li>
                                 @endforeach
@@ -65,7 +65,7 @@
                                 @foreach($latests as $latest)
                                 <li>
                                     <div class="image">
-                                        <a href="{{ route('post_single', $latest->slug) }}"><img src="{{ url('/uploads/'.$post->image) }}" alt="post image" class="img-responsive"></a>
+                                        <a href="{{ route('post_single', $latest->slug) }}"><img src="{{ url('/uploads/'.$latest->image) }}" alt="post image" class="img-responsive"></a>
                                     </div>
                                     <div class="content">
                                         <a href="{{ route('post_single', $latest->slug) }}">Foulate revlunry and the mihare are a awesome the theme.</a>
@@ -79,7 +79,7 @@
                             <h3 class="sidebar-title">Latest Tags</h3>
                             <ul class="sidebar-tags">
                                 @foreach($tags as $tag)
-                                <li><a href="{{ route('tag', $tag->slug) }}">{{ $tag->name }}</a></li>
+                                    <li><a href="{{ route('tag', $tag->slug) }}">{{ $tag->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
