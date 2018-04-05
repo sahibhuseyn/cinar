@@ -30,6 +30,12 @@ Route::group(['middleware' => [ 'web']], function () {
     });
 
 
+    Route::group(['prefix' => 'editions'], function (){
+        Route::get('/', 'Client\EditionController@editions')->name('editions');
+        Route::get('/{slug}', 'Client\EditionController@editionSingle')->name('edition_single');
+    });
+
+
 });
 
 

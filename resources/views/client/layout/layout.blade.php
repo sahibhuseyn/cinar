@@ -49,6 +49,7 @@
 
 <script src="{{ url('/client/js/jquery-1.12.4.min.js') }}"></script>
 <script src="{{ url('/client/js/bootstrap.min.js') }}"></script>
+@yield('js')
 <script src="{{ url('/client/js/custom.js') }}"></script>
 </body>
 </html>
