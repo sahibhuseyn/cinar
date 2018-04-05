@@ -35,6 +35,11 @@ Route::group(['middleware' => [ 'web']], function () {
         Route::get('/{slug}', 'Client\EditionController@editionSingle')->name('edition_single');
     });
 
+    Route::group(['prefix' => 'exams'], function (){
+        Route::get('/', 'Client\ExamController@exams')->name('exams');
+        Route::get('/{slug}', 'Client\ExamController@editionSingle')->name('exam_single');
+    });
+
 
 });
 

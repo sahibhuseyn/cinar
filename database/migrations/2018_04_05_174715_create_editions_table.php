@@ -16,6 +16,8 @@ class CreateEditionsTable extends Migration
         Schema::create('editions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('category');
+            $table->string('name');
+            $table->string('slug')->unique();
             $table->string('image');
             $table->string('pages');
             $table->string('answer');
@@ -24,7 +26,6 @@ class CreateEditionsTable extends Migration
             $table->string('author');
             $table->string('press');
             $table->string('page_count');
-            $table->string('link');
             $table->timestamps();
         });
     }

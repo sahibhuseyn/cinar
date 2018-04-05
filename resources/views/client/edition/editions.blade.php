@@ -21,68 +21,26 @@
         <div class="container">
             <ul class="gallery-menu">
                 <li class="active" data-filter="*">Hamısı</li>
-                <li data-filter=".bir">1-ci sinif</li>
-                <li data-filter=".iki">2-ci sinif</li>
-                <li data-filter=".uc">3-cü sinif</li>
-                <li data-filter=".dord">4-cü sinif</li>
+
+
+                @foreach($categories as $category)
+                    <li data-filter=".{{ preg_replace('/\s+/', '', $category['category']) }}">{{ $category['category'] }}</li>
+                @endforeach
+
             </ul>
             <div class="gallery-items">
-                <a href="edition_details.html">
-                    <div class="gallery-item bir">
-                        <div class="gallery-image">
-                            <img src="images/sinif1.jpg" alt="gallery image" class="img-responsive">
+
+                @foreach($editions as $edition)
+                    <a href="{{ route('edition_single', $edition->slug) }}">
+                        <div class="gallery-item {{ preg_replace('/\s+/', '' ,$edition->category) }}">
+                            <div class="gallery-image">
+                                <img src="{{ url('/uploads/'.$edition->image) }}" alt="gallery image" class="img-responsive">
+                            </div>
                         </div>
-                    </div>
-                </a>
-                <a href="edition_details.html">
-                    <div class="gallery-item iki">
-                        <div class="gallery-image">
-                            <img src="images/sinif2.jpg" alt="gallery image" class="img-responsive">
-                        </div>
-                    </div>
-                </a>
-                <a href="edition_details.html">
-                    <div class="gallery-item uc">
-                        <div class="gallery-image">
-                            <img src="images/sinif3.jpg" alt="gallery image" class="img-responsive">
-                        </div>
-                    </div>
-                </a>
-                <a href="edition_details.html">
-                    <div class="gallery-item dord">
-                        <div class="gallery-image">
-                            <img src="images/sinif4.jpg" alt="gallery image" class="img-responsive">
-                        </div>
-                    </div>
-                </a>
-                <a href="edition_details.html">
-                    <div class="gallery-item bir">
-                        <div class="gallery-image">
-                            <img src="images/sinif1.jpg" alt="gallery image" class="img-responsive">
-                        </div>
-                    </div>
-                </a>
-                <a href="edition_details.html">
-                    <div class="gallery-item iki">
-                        <div class="gallery-image">
-                            <img src="images/sinif2.jpg" alt="gallery image" class="img-responsive">
-                        </div>
-                    </div>
-                </a>
-                <a href="edition_details.html">
-                    <div class="gallery-item uc">
-                        <div class="gallery-image">
-                            <img src="images/sinif3.jpg" alt="gallery image" class="img-responsive">
-                        </div>
-                    </div>
-                </a>
-                <a href="edition_details.html">
-                    <div class="gallery-item dord">
-                        <div class="gallery-image">
-                            <img src="images/sinif4.jpg" alt="gallery image" class="img-responsive">
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                @endforeach
+
+
             </div>
         </div>
     </section>
