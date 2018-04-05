@@ -13,6 +13,7 @@ class SettingSeeder extends Seeder
     {
         DB::table('user_settings')->insert([
             'phone' => '055 224-56-26',
+            'email' => 'info@cinaryayimlari.com',
             'work_hours' => '9:00-19:00',
             'address' => 'Azerbaijan, Baku',
             'facebook' => 'https://www.facebook.com/cinaryayimlari/',

@@ -17,8 +17,10 @@ Route::group(['middleware' => [ 'web']], function () {
 
     // Page Routes
     Route::get('/', 'Client\MainController@index')->name('index');
-    Route::get('/contacts', 'Client\ContactController@contacts')->name('contacts');
-    Route::get('/about', 'Client\AboutController@about')->name('about');
+    Route::get('/contact', 'Client\MainController@contact')->name('contacts');
+    Route::get('/about', 'Client\MainController@about')->name('about');
+    Route::get('/director', 'Client\MainController@director')->name('director');
+    Route::get('/logo', 'Client\MainController@logo')->name('logo');
 
 
 
@@ -99,6 +101,13 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'dashboard'], functio
         Route::post('/add', 'Admin\SeoController@add')->name('admin_seo_add');
         Route::post('/{seo}/update', 'Admin\SeoController@update')->name('admin_seo_update');
         Route::post('/{seo}/delete', 'Admin\SeoController@delete')->name('admin_seo_delete');
+    });
+
+    Route::group(['prefix' => 'settings'], function () {
+        Route::get('/', 'Admin\SettingController@show')->name('admin_setting');
+        Route::post('/add', 'Admin\SettingController@add')->name('admin_setting_add');
+        Route::post('/{setting}/update', 'Admin\SettingController@update')->name('admin_setting_update');
+        Route::post('/{setting}/delete', 'Admin\SettingController@delete')->name('admin_setting_delete');
     });
 
 //    post and its tags and categories root section starts

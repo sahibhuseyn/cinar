@@ -167,6 +167,15 @@
                 <li><a href="{{ route('admin_facility') }}">Facilities</a></li>
             </ul>
         </li>
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user  media" data-sidebar="true" href="javascript:void(0)">
+                <i class="material-icons md-dark pmd-md" style="color: #ffffff">apps</i>
+                <span>Settings</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('admin_setting') }}">Facilities</a></li>
+            </ul>
+        </li>
 
 
     </ul>

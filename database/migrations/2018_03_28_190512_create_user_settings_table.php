@@ -18,6 +18,7 @@ class CreateUserSettingsTable extends Migration
             $table->string('phone');
             $table->string('work_hours');
             $table->string('address');
+            $table->string('email');
             $table->string('facebook');
             $table->string('instagram');
             $table->string('youtube');

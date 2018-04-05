@@ -15,6 +15,7 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('category')->nullable();
             $table->string('image');
             $table->string('answer_jpg');
             $table->string('answer_pdf');

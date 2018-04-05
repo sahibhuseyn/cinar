@@ -19,4 +19,20 @@ class MainController extends Controller
         return view('client.index.index', compact('sliders', 'facilities'));
 
     }
+
+    public function about(){
+        return view('client.about.about');
+    }
+
+    public function contact(){
+        return view('client.contact.contact');
+    }
+
+    public function director(){
+        return view('client.director.director');
+    }
+
+    public function logo(){
+        return view('client.logo.logo');
+    }
 }
