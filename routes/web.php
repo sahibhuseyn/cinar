@@ -33,8 +33,9 @@ Route::group(['middleware' => [ 'web']], function () {
 
 
     Route::group(['prefix' => 'editions'], function (){
-        Route::get('/', 'Client\EditionController@editions')->name('editions');
-        Route::get('/{slug}', 'Client\EditionController@editionSingle')->name('edition_single');
+        Route::get('/{edition}', 'Client\EditionController@editions')->name('editions');
+        Route::get('/{edition}/{slug}', 'Client\EditionController@editionSingle')->name('edition_single');
+
     });
 
     Route::group(['prefix' => 'exams'], function (){
@@ -109,6 +110,25 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'dashboard'], functio
         Route::post('/{setting}/update', 'Admin\SettingController@update')->name('admin_setting_update');
         Route::post('/{setting}/delete', 'Admin\SettingController@delete')->name('admin_setting_delete');
     });
+
+    Route::group(['prefix' => 'exams'], function () {
+        Route::get('/', 'Admin\ExamController@show')->name('admin_exams');
+        Route::get('/add-new-exam', 'Admin\ExamController@newExam')->name('admin_add_new_exam');
+        Route::post('/add', 'Admin\ExamController@add')->name('admin_exam_add');
+        Route::get('/{exam}/edit', 'Admin\ExamController@edit')->name('admin_exam_edit');
+        Route::post('/{exam}/update', 'Admin\ExamController@update')->name('admin_exam_update');
+        Route::post('/{exam}/delete', 'Admin\ExamController@delete')->name('admin_exam_delete');
+    });
+
+    Route::group(['prefix' => 'editions'], function () {
+        Route::get('/', 'Admin\EditionController@show')->name('admin_editions');
+        Route::get('/add-new-edition', 'Admin\EditionController@newEdition')->name('admin_add_new_edition');
+        Route::post('/add', 'Admin\EditionController@add')->name('admin_edition_add');
+        Route::get('/{edition}/edit', 'Admin\EditionController@edit')->name('admin_edition_edit');
+        Route::post('/{edition}/update', 'Admin\EditionController@update')->name('admin_edition_update');
+        Route::post('/{edition}/delete', 'Admin\EditionController@delete')->name('admin_edition_delete');
+    });
+
 
 //    post and its tags and categories root section starts
 

@@ -119,6 +119,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li><a href="{{ route('admin_posts') }}">Posts</a></li>
+                <li><a href="{{ route('admin_add_new_post') }}">Add new Post</a></li>
             </ul>
         </li>
         <li class="dropdown pmd-dropdown">
@@ -173,7 +174,27 @@
                 <span>Settings</span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{{ route('admin_setting') }}">Facilities</a></li>
+                <li><a href="{{ route('admin_setting') }}">Settings</a></li>
+            </ul>
+        </li>
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user  media" data-sidebar="true" href="javascript:void(0)">
+                <i class="material-icons md-dark pmd-md" style="color: #ffffff">apps</i>
+                <span>Exams</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('admin_exams') }}">Exams</a></li>
+                <li><a href="{{ route('admin_add_new_exam') }}">Add New Exam</a></li>
+            </ul>
+        </li>
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user  media" data-sidebar="true" href="javascript:void(0)">
+                <i class="material-icons md-dark pmd-md" style="color: #ffffff">apps</i>
+                <span>Editions</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('admin_editions') }}">Editions</a></li>
+                <li><a href="{{ route('admin_add_new_edition') }}">Add New Edition</a></li>
             </ul>
         </li>
 
@@ -293,7 +314,6 @@
 </script>
 
 <script src="{{ url('/admin/assets/js/propeller.min.js') }}"></script>
-
 
 @yield('script')
 </body>

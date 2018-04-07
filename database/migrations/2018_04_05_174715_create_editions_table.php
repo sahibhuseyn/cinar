@@ -15,7 +15,8 @@ class CreateEditionsTable extends Migration
     {
         Schema::create('editions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('sub_menu_category')->nullable();
+            $table->integer('sub_menu_id')->unsigned();
+            $table->foreign('sub_menu_id')->references('id')->on('sub_menus')->onDelete('cascade');
             $table->string('category');
             $table->string('name');
             $table->string('slug')->unique();

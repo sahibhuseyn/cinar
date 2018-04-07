@@ -8,10 +8,10 @@ use App\Http\Controllers\Controller;
 
 class EditionController extends Controller
 {
-    public function editions(){
+    public function editions($edition){
 
-        $editions = Edition::getEdition();
         $categories = Edition::getEditionCat();
+        $editions = Edition::getEditionByTypeId($edition);
 
         return view('client.edition.editions', compact('editions', 'categories'));
     }
@@ -23,4 +23,5 @@ class EditionController extends Controller
         return view('client.edition.single', compact('edition'));
 
     }
+
 }

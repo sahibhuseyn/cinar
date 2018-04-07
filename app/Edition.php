@@ -20,4 +20,15 @@ class Edition extends Model
 
         return Edition::where('slug', $slug)->first();
     }
+
+    public function category(){
+
+        return $this->belongsTo(SubMenu::class);
+    }
+
+    public static function getEditionByTypeId($edition){
+
+        return Edition::where('sub_menu_id', $edition)->get();
+    }
+
 }

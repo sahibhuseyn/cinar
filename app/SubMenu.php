@@ -23,4 +23,14 @@ class SubMenu extends Model
     {
         return $this->belongsTo(Menu::class);
     }
+
+    public function exam(){
+
+        return $this->hasMany(Exam::class);
+    }
+
+    public function edition(){
+
+        return $this->hasMany(Edition::class);
+    }
 }

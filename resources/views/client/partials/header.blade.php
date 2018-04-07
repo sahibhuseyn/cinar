@@ -30,41 +30,67 @@
                     <a class="navbar-brand" href="{{ route('index') }}"><img src="{{ url('/client/images/logo1.png') }}" alt="logo" class="img-responsive" style="width: 170px;"></a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    @php
+                        $menus = App\Menu::orderBy('position', 'ASC')->get();
+                    @endphp
+
+
+
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Çinar<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="about.html">Haqqımızda</a></li>
-                                <li><a href="director.html">Rəhbərlik</a></li>
+                                <li><a href="{{ route('about') }}">Haqqımızda</a></li>
+                                <li><a href="{{ route('director') }}">Rəhbərlik</a></li>
                                 <li><a href="#">Struktur Bölmələr</a></li>
-                                <li><a href="logo.html">Loqo</a></li>
+                                <li><a href="{{ route('logo') }}">Loqo</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nəşrlər<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Uşaq Ədəbiyyatı</a></li>
-                                <li><a href="#">Məktəbəqədər</a></li>
-                                <li><a href="#">İbtidai Siniflər</a></li>
-                                <li><a href="#">Orta Siniflər</a></li>
-                                <li><a href="#">Cavabları Yüklə</a></li>
-                                <li><a href="#">Kataloq</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sınaq İmtahanım<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="exam.html">Oktyabr Seriyası</a></li>
-                                <li><a href="#">Noyabr Seriyası</a></li>
-                                <li><a href="#">Dekabr Seriyası</a></li>
-                                <li><a href="#">Yanvar Seriyası</a></li>
-                                <li><a href="#">Fevral Seriyası</a></li>
-                            </ul>
-                        </li>
+
+                        @foreach($menus as $menu)
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $menu->name }}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach($menu->submenu as $subMenu)
+                                        @if($menu->id == 1)
+                                            <li><a href="{{ route('exams') }}">{{ $subMenu->name }}</a></li>
+                                        @elseif($menu->id == 2)
+                                            <li><a href="{{ route('editions', $subMenu->id) }}">{{ $subMenu->name }}</a></li>
+
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </li>
+
+                        @endforeach
+
+                        {{--<li class="dropdown">--}}
+                            {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nəşrlər<span class="caret"></span></a>--}}
+                            {{--<ul class="dropdown-menu">--}}
+                                {{--<li><a href="#">Uşaq Ədəbiyyatı</a></li>--}}
+                                {{--<li><a href="#">Məktəbəqədər</a></li>--}}
+                                {{--<li><a href="#">İbtidai Siniflər</a></li>--}}
+                                {{--<li><a href="#">Orta Siniflər</a></li>--}}
+                                {{--<li><a href="#">Cavabları Yüklə</a></li>--}}
+                                {{--<li><a href="#">Kataloq</a></li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li class="dropdown">--}}
+                            {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sınaq İmtahanım<span class="caret"></span></a>--}}
+                            {{--<ul class="dropdown-menu">--}}
+                                {{--<li><a href="exam.html">Oktyabr Seriyası</a></li>--}}
+                                {{--<li><a href="#">Noyabr Seriyası</a></li>--}}
+                                {{--<li><a href="#">Dekabr Seriyası</a></li>--}}
+                                {{--<li><a href="#">Yanvar Seriyası</a></li>--}}
+                                {{--<li><a href="#">Fevral Seriyası</a></li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Media<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="news.html">Xəbərlər</a></li>
+                                <li><a href="{{ route('post_list') }}">Xəbərlər</a></li>
                                 <li><a href="#">Elanlar</a></li>
                                 <li><a href="#">Media təqib</a></li>
                                 <li><a href="#">Foto</a></li>
@@ -78,7 +104,7 @@
                                 <li><a href="#">Təklif və İradlar</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">Əlaqə</a></li>
+                        <li><a href="{{ route('contacts') }}">Əlaqə</a></li>
                     </ul>
                 </div>
             </div>
