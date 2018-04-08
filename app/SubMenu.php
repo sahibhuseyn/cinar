@@ -33,4 +33,8 @@ class SubMenu extends Model
 
         return $this->hasMany(Edition::class);
     }
+
+    public function getRouteKeyName(){
+        return 'slug';
+    }
 }

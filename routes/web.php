@@ -33,14 +33,14 @@ Route::group(['middleware' => [ 'web']], function () {
 
 
     Route::group(['prefix' => 'editions'], function (){
-        Route::get('/{edition}', 'Client\EditionController@editions')->name('editions');
-        Route::get('/{edition}/{slug}', 'Client\EditionController@editionSingle')->name('edition_single');
+        Route::get('/{subMenu}', 'Client\EditionController@editions')->name('editions');
+        Route::get('/edition/{slug}', 'Client\EditionController@editionSingle')->name('edition_single');
 
     });
 
     Route::group(['prefix' => 'exams'], function (){
-        Route::get('/', 'Client\ExamController@exams')->name('exams');
-        Route::get('/{slug}', 'Client\ExamController@editionSingle')->name('exam_single');
+        Route::get('/{subMenu}', 'Client\ExamController@exams')->name('exams');
+//        Route::get('/{slug}', 'Client\ExamController@editionSingle')->name('exam_single');
     });
 
 

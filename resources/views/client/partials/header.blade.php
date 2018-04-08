@@ -32,9 +32,8 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     @php
-                        $menus = App\Menu::orderBy('position', 'ASC')->get();
+                        $menus = App\Menu::with('submenu')->orderBy('position', 'ASC')->get();
                     @endphp
-
 
 
                     <ul class="nav navbar-nav navbar-right">
@@ -54,10 +53,10 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $menu->name }}<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     @foreach($menu->submenu as $subMenu)
-                                        @if($menu->id == 1)
-                                            <li><a href="{{ route('exams') }}">{{ $subMenu->name }}</a></li>
-                                        @elseif($menu->id == 2)
-                                            <li><a href="{{ route('editions', $subMenu->id) }}">{{ $subMenu->name }}</a></li>
+                                        @if($menu->id == 2)
+                                            <li><a href="{{ route('exams', ['subMenu' => $subMenu->slug] ) }}">{{ $subMenu->name }}</a></li>
+                                        @elseif($menu->id == 1)
+                                            <li><a href="{{ route('editions', ['subMenu' => $subMenu->slug]) }}">{{ $subMenu->name }}</a></li>
 
                                         @endif
                                     @endforeach

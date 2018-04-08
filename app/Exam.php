@@ -23,4 +23,10 @@ class Exam extends Model
         return $this->belongsTo(SubMenu::class);
     }
 
+
+    public static function getExamByTypeId($exam){
+
+        return Exam::where('sub_menu_id', $exam)->get();
+    }
+
 }
