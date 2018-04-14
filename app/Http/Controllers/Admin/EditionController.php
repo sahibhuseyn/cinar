@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Edition;
+use App\EditionCategory;
 use App\SubMenu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,16 +15,18 @@ class EditionController extends Controller
     public function show(){
 
         $editions = Edition::getEdition();
-        $category = SubMenu::all()->load('edition');
+        $category = EditionCategory::all()->load('edition');
 
         return view('admin.editions.edition', compact('editions', 'category'));
 
     }
 
 
-    public function edit(Edition $edition){
+    public function edit($id){
 
-        $categories = SubMenu::getSubMenu();
+        $edition = Edition::where('id', $id)->first();
+
+        $categories = EditionCategory::getCategories();
 
         return view('admin.editions.single', compact('edition', 'categories'));
     }
@@ -53,7 +56,7 @@ class EditionController extends Controller
 
         if ($request->categories != '-'){
 
-            $edition->sub_menu_id = $request->categories;
+            $edition->edition_category_id = $request->categories;
 
         }else{
 
@@ -80,7 +83,6 @@ class EditionController extends Controller
         }
 
 
-        $edition->category = $request->category;
         $edition->pages = $request->pages;
         $edition->answer = $request->answer;
         $edition->press = $request->press;
@@ -100,19 +102,17 @@ class EditionController extends Controller
 
     }
 
-    public function update(Edition $edition, Request $request){
+    public function update(Request $request, $id){
 
         $slug = str_slug($request->name);
 
         $exists = Edition::editionBySlug($slug);
 
-
-
+        $edition = Edition::where('id', $id)->first();
 
         if (!$exists) {
             $edition->name = $request->name;
             $edition->slug = $slug;
-            $edition->category = $request->category;
             $edition->pages = $request->pages;
             $edition->answer = $request->answer;
             $edition->press = $request->press;
@@ -123,7 +123,7 @@ class EditionController extends Controller
 
             if ($request->categories != '-'){
 
-                $edition->sub_menu_id = $request->categories;
+                $edition->edition_category_id = $request->categories;
 
             }else{
 
@@ -153,7 +153,6 @@ class EditionController extends Controller
             if ($exists->id == $edition->id) {
                 $edition->name = $request->name;
                 $edition->slug = $slug;
-                $edition->category = $request->category;
                 $edition->pages = $request->pages;
                 $edition->answer = $request->answer;
                 $edition->press = $request->press;
@@ -165,7 +164,7 @@ class EditionController extends Controller
 
                 if ($request->categories != '-'){
 
-                    $edition->sub_menu_id = $request->categories;
+                    $edition->edition_category_id = $request->categories;
 
                 }else{
 

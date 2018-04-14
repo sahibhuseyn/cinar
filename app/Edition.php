@@ -11,24 +11,20 @@ class Edition extends Model
         return Edition::all();
     }
 
-    public static function getEditionCat(){
-
-        return Edition::distinct()->get(['category']);
-    }
-
     public static function  editionBySlug($slug){
 
         return Edition::where('slug', $slug)->first();
     }
 
-    public function category(){
 
-        return $this->belongsTo(SubMenu::class);
+
+    public function categories(){
+
+        return $this->belongsTo(EditionCategory::class);
     }
 
-    public static function getEditionByTypeId($edition){
-
-        return Edition::where('sub_menu_id', $edition)->get();
+    public function getRouteKeyName(){
+        return 'slug';
     }
 
 }

@@ -37,6 +37,7 @@ class ExamController extends Controller
 
     public function add(Request $request){
 
+        $files=[];
 
         $slug = str_slug($request->name);
 
@@ -66,6 +67,11 @@ class ExamController extends Controller
 
         $exam->slug = $slug;
 
+//        if($request->file('product_image'))   $files[] = $request->file('product_image');
+//        if($request->file('vendor_image'))   $files[] = $request->file('vendor_image');
+//        if($request->file('user_image'))     $files[] = $request->file('user_image');
+
+
         if ($request->image) {
 
 
@@ -83,7 +89,7 @@ class ExamController extends Controller
 
         if ($request->answer_jpg) {
 
-            $answer_jpg = $request->file('image');
+            $answer_jpg = $request->file('answer_jpg');
             $answer_name  = time() . $answer_jpg->getClientOriginalName();
 
             $answer_path = public_path('uploads/');
@@ -95,10 +101,10 @@ class ExamController extends Controller
         }
         if ($request->answer_pdf) {
 
-            $answer_pdf = $request->file('pdf');
+            $answer_pdf = $request->file('answer_pdf');
             $filename  = time() . $answer_pdf->getClientOriginalName();
 
-            $path = public_path('uploads/');
+            $path = public_path('downloads/');
 
             $answer_pdf->move($path, $filename);
 

@@ -197,6 +197,15 @@
                 <li><a href="{{ route('admin_add_new_edition') }}">Add New Edition</a></li>
             </ul>
         </li>
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user  media" data-sidebar="true" href="javascript:void(0)">
+                <i class="material-icons md-dark pmd-md" style="color: #ffffff">apps</i>
+                <span>Edition Categories</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('admin_edition_categories') }}">Edition Categories</a></li>
+            </ul>
+        </li>
 
 
     </ul>

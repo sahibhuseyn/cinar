@@ -8,6 +8,7 @@ use App\Slider;
 use App\UserSetting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class MainController extends Controller
 {
@@ -35,4 +36,15 @@ class MainController extends Controller
     public function logo(){
         return view('client.logo.logo');
     }
+
+    public function downloadFile($file)
+    {
+        $myFile = public_path("downloads/".$file);
+        $headers = ['Content-Type: application/pdf'];
+        $filename = basename($file);
+//        dd($filename);
+
+        return response()->download($myFile, $filename ,$headers);
+    }
+
 }

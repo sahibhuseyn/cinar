@@ -53,6 +53,10 @@
                                 <label for="name" class="control-label">Exam Answer PDF</label>
                                 <input type="file" name="answer_pdf" id="name" class="form-control"><span class="pmd-textfield-focused"></span>
                             </div>
+                            <div class="form-group pmd-textfield">
+                                <label for="name" class="control-label">Pages PDF</label>
+                                <input type="file" name="pages" id="name" class="form-control"><span class="pmd-textfield-focused"></span>
+                            </div>
 
                             <button type="submit" class="btn btn-success">Submit</button>
                             <a href="{{ route('admin_exams') }}" class="btn btn-primary">Back</a>

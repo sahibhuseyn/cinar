@@ -16,34 +16,48 @@
     </section>
     <!-- Page Header End here -->
 
-    <!-- Edition Start here -->
-    <section class="gallery padding-120">
-        <div class="container">
-            <ul class="gallery-menu">
-                <li class="active" data-filter="*">Hamısı</li>
+    <div class="container">
+        <div class="row">
 
-
-                @foreach($categories as $category)
-                    <li data-filter=".{{ preg_replace('/\s+/', '', $category['category']) }}">{{ $category['category'] }}</li>
-                @endforeach
-
-            </ul>
-            <div class="gallery-items">
-
-                @foreach($editions as $edition)
-                    <a href="{{ route('edition_single', $edition->slug) }}">
-                        <div class="gallery-item {{ preg_replace('/\s+/', '' ,$edition->category) }}">
-                            <div class="gallery-image">
-                                <img src="{{ url('/uploads/'.$edition->image) }}" alt="gallery image" class="img-responsive">
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
-
-
-            </div>
+            @foreach($categories as $category)
+                <div class="col-md-4"><img src="{{ url('uploads/'.$category->image) }}" alt="">
+                    <p><a href="{{ route('editions', $category->slug) }}">{{ $category->name }}</a></p>
+                </div>
+            @endforeach
         </div>
-    </section>
+    </div>
+
+
+
+
+    <!-- Edition Start here -->
+    {{--<section class="gallery padding-120">--}}
+        {{--<div class="container">--}}
+            {{--<ul class="gallery-menu">--}}
+                {{--<li class="active" data-filter="*">Hamısı</li>--}}
+
+
+                {{--@foreach($categories as $category)--}}
+                    {{--<li data-filter=".{{ preg_replace('/\s+/', '', $category['category']) }}">{{ $category['category'] }}</li>--}}
+                {{--@endforeach--}}
+
+            {{--</ul>--}}
+            {{--<div class="gallery-items">--}}
+
+                {{--@foreach($editions as $edition)--}}
+                    {{--<a href="{{ route('edition_single', $edition->slug) }}">--}}
+                        {{--<div class="gallery-item {{ preg_replace('/\s+/', '' ,$edition->category) }}">--}}
+                            {{--<div class="gallery-image">--}}
+                                {{--<img src="{{ url('/uploads/'.$edition->image) }}" alt="gallery image" class="img-responsive">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</a>--}}
+                {{--@endforeach--}}
+
+
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</section>--}}
     <!-- Edition End here -->
 
 @endsection

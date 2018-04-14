@@ -29,9 +29,9 @@ class SubMenu extends Model
         return $this->hasMany(Exam::class);
     }
 
-    public function edition(){
+    public function editionCats(){
 
-        return $this->hasMany(Edition::class);
+        return $this->hasMany(EditionCategory::class);
     }
 
     public function getRouteKeyName(){

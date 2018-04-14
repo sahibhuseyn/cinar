@@ -32,7 +32,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     @php
-                        $menus = App\Menu::with('submenu')->orderBy('position', 'ASC')->get();
+                        $menus = App\Menu::with('submenu')->get();
                     @endphp
 
 
@@ -56,8 +56,7 @@
                                         @if($menu->id == 2)
                                             <li><a href="{{ route('exams', ['subMenu' => $subMenu->slug] ) }}">{{ $subMenu->name }}</a></li>
                                         @elseif($menu->id == 1)
-                                            <li><a href="{{ route('editions', ['subMenu' => $subMenu->slug]) }}">{{ $subMenu->name }}</a></li>
-
+                                            <li><a href="{{ route('editions_category',['subMenu' => $subMenu->slug ]) }}">{{ $subMenu->name }}</a></li>
                                         @endif
                                     @endforeach
                                 </ul>

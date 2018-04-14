@@ -24,6 +24,7 @@ Route::group(['middleware' => [ 'web']], function () {
 
 
 
+
     Route::group(['prefix' => 'posts'], function (){
         Route::get('/', 'Client\PostController@postList')->name('post_list');
         Route::get('/{slug}', 'Client\PostController@postSingle')->name('post_single');
@@ -33,13 +34,22 @@ Route::group(['middleware' => [ 'web']], function () {
 
 
     Route::group(['prefix' => 'editions'], function (){
-        Route::get('/{subMenu}', 'Client\EditionController@editions')->name('editions');
+        Route::get('/{subMenu}', 'Client\EditionController@editions')->name('editions_category');
+        Route::get('/category/{category}', 'Client\EditionController@edition')->name('editions');
         Route::get('/edition/{slug}', 'Client\EditionController@editionSingle')->name('edition_single');
 
     });
 
+//    Route::get('download/{filename}', function($filename)
+//        {
+//            $file = public_path('uploads') . '/' . $filename; // or wherever you have stored your PDF files
+//            return response()->download($file);
+//        })->name('download');
+
+    Route::get('/download/{file}', 'Client\MainController@downloadFile')->name('download');
     Route::group(['prefix' => 'exams'], function (){
         Route::get('/{subMenu}', 'Client\ExamController@exams')->name('exams');
+
 //        Route::get('/{slug}', 'Client\ExamController@editionSingle')->name('exam_single');
     });
 
@@ -120,6 +130,8 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'dashboard'], functio
         Route::post('/{exam}/delete', 'Admin\ExamController@delete')->name('admin_exam_delete');
     });
 
+//    edition and its cats
+
     Route::group(['prefix' => 'editions'], function () {
         Route::get('/', 'Admin\EditionController@show')->name('admin_editions');
         Route::get('/add-new-edition', 'Admin\EditionController@newEdition')->name('admin_add_new_edition');
@@ -128,6 +140,17 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'dashboard'], functio
         Route::post('/{edition}/update', 'Admin\EditionController@update')->name('admin_edition_update');
         Route::post('/{edition}/delete', 'Admin\EditionController@delete')->name('admin_edition_delete');
     });
+
+    Route::group(['prefix' => 'edition-categories'], function () {
+        Route::get('/', 'Admin\EditionCategoryController@show')->name('admin_edition_categories');
+        Route::post('/add', 'Admin\EditionCategoryController@add')->name('admin_add_new_edition_category');
+        Route::get('/{category}/edit', 'Admin\EditionCategoryController@edit')->name('admin_edition_category_edit');
+        Route::post('/{category}/update', 'Admin\EditionCategoryController@update')->name('admin_edition_category_update');
+        Route::post('/{category}/delete', 'Admin\EditionCategoryController@delete')->name('admin_edition_category_delete');
+    });
+
+
+//    editions and its cats end
 
 
 //    post and its tags and categories root section starts

@@ -55,7 +55,7 @@
                                 <select name="categories" class="form-control select-add-tags pmd-select2-tags select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true">
 
                                     @php
-                                        $categories = App\SubMenu::getSubMenu()
+                                        $categories = App\EditionCategory::getCategories()
                                     @endphp
 
                                     @foreach($categories as $category)

@@ -35,22 +35,17 @@
 
 
                             <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                                <label>Select Menu Category</label>
+                                <label>Select Edition Category</label>
                                 <select name="categories" class="form-control select-add-tags pmd-select2-tags select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true">
 
                                     @php
-                                        $categories = App\SubMenu::getSubMenu()
+                                        $categories = App\EditionCategory::all();
                                     @endphp
 
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-
-                            <div class="form-group pmd-textfield">
-                                <label for="name" class="control-label">Edition Page Category</label>
-                                <input type="text" name="category" id="name" class="form-control"><span class="pmd-textfield-focused"></span>
                             </div>
 
                             <div class="form-group pmd-textfield">
@@ -129,6 +124,5 @@
 
 
     <script src="{{ url('/admin/components/select2/js/pmd-select2.js') }}"></script>
-    <script src="https://cdn.ckeditor.com/4.7.1/full/ckeditor.js"></script>
 
 @endsection

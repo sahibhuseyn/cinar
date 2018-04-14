@@ -34,12 +34,12 @@
                                         <span>Nümunə Səhifələr</span>
                                     </li>
                                 </a>
-                                <a href="{{ $exam->answer_pdf }}" target="_blank">
+                                <a href="{{ route('download', ['file' => $exam->answer_pdf]) }}" target="_blank">
                                     <li>
                                         <span>Cavablar (PDF)</span>
                                     </li>
                                 </a>
-                                <a href="{{ $exam->answer_jpg }}" target="_blank">
+                                <a href="{{ url('/uploads/'.$exam->answer_jpg) }}" target="_blank">
                                     <li>
                                         <span>Cavablar (JPG)</span>
                                     </li>

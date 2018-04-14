@@ -6,6 +6,7 @@ use App\Exam;
 use App\SubMenu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class ExamController extends Controller
 {
@@ -14,4 +15,5 @@ class ExamController extends Controller
 
          return view('client.exam.exam', compact('exams'));
      }
+
 }
